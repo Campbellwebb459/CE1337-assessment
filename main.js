@@ -18,19 +18,19 @@ let  questions = [
     { question: "Which metal is a liquid at room temperature?", answerList: "1. Mercury\n2. Lead\n3. Tin\n4. Zinc", used: false, correctAnswer: 1},
     { question: "Which of these words appear on a keyboard exactly once?", answerList: "1. Shift\n2. Enter\n3. Space\n4. Delete", used: false, correctAnswer: 3},];
 
+function nextQuestion(){
+    let randomQuestion = Math.floor(Math.random() * 10)
 
+    while(questions.used[randomQuestion] == true){
+        randomQuestion = Math.floor(Math.random() * 10)
+    }
+currentQuestion = randomQuestion
 
-
-
-
-
-
-
-
-
-    
-
-function quizLoop(){
+questions.used[randomQuestion] = true
+return currentQuestion
+}
+  
+  function quizLoop(){
 if(questionCounter == 10){
     console.log("You won a million")
 }
@@ -45,5 +45,4 @@ let input;
 input = prompt.question("Enter your answer: ")
 
 checkAnswer()
-
 }
