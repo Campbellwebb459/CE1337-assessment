@@ -2,9 +2,9 @@ const prompt = require("readline-sync");
 
 let moneyAwarded = [500, 1000, 5000, 10000, 20000, 50000, 100000, 250000, 500000, 1000000];
 
-let questionCounter = 0
+let questionCounter = 0;
 
-let currentQuestion = 0
+let currentQuestion = 0;
 
 let  questions = [
     { question: "Which of these countries has the largest population?", answerList: "1. Brazil\n2. Nigeria\n3. India\n4. Russia", used: false, correctAnswer: 3},
@@ -19,57 +19,57 @@ let  questions = [
     { question: "Which of these words appear on a keyboard exactly once?", answerList: "1. Shift\n2. Enter\n3. Space\n4. Delete", used: false, correctAnswer: 3},];
 
 function nextQuestion(){
-    let randomQuestion = Math.floor(Math.random() * 10)
+    let randomQuestion = Math.floor(Math.random() * 10);
 
     while(questions[randomQuestion].used == true){
-        randomQuestion = Math.floor(Math.random() * 10)
+        randomQuestion = Math.floor(Math.random() * 10);
     }
-currentQuestion = randomQuestion
+currentQuestion = randomQuestion;
 
-questions[randomQuestion].used = true
-return currentQuestion
+questions[randomQuestion].used = true;
+return currentQuestion;
 }
   
   function quizLoop(){
 
-currentQuestion = nextQuestion()
+currentQuestion = nextQuestion();
 
-questionCounter = questionCounter + 1
+questionCounter = questionCounter + 1;
 
-console.log(questions[currentQuestion].question + "\n" + questions[currentQuestion].answerList)
+console.log(questions[currentQuestion].question + "\n" + questions[currentQuestion].answerList);
 
 let input;
 
-input = prompt.question("Enter your answer: ")
+input = prompt.question("Enter your answer: ");
 
-answerCheck(input)
+answerCheck(input);
 }
 
 function answerCheck(input){
     let currentWinnings;
     let playerChoice;
     if(input == questions[currentQuestion].correctAnswer){
-        currentWinnings = moneyAwarded[questionCounter - 1]
+        currentWinnings = moneyAwarded[questionCounter - 1];
 
     if(questionCounter == 10){
-     console.log("You won a million")
+     console.log("You won a million");
     process.exit();
     }
 
-    console.log("Correct! Your new cash prize is: " + moneyAwarded[questionCounter - 1] + "\nYour next cash prize will be: " + moneyAwarded[questionCounter])
+    console.log("Correct! Your new cash prize is: " + moneyAwarded[questionCounter - 1] + "\nYour next cash prize will be: " + moneyAwarded[questionCounter]);
     
     playerChoice = prompt.question("Would you like to continue or cash out your prize?(Yes/No): ");
     while(playerChoice != "Yes" && playerChoice != "No"){
-        playerChoice = prompt.question("Please enter Yes or No: ")
+        playerChoice = prompt.question("Please enter Yes or No: ");
     }
         if(playerChoice == "Yes"){
-            quizLoop()
+            quizLoop();
     }else{
-        console.log("You cashed out with: £" + currentWinnings)
+        console.log("You cashed out with: £" + currentWinnings);
         process.exit();
     }
 }else{
-    console.log("Incorrect! Unfortunatley you lose your cash prize")
+    console.log("Incorrect! Unfortunatley you lose your cash prize");
     process.exit();
 }
 }
