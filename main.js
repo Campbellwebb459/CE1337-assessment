@@ -21,28 +21,56 @@ let  questions = [
 function nextQuestion(){
     let randomQuestion = Math.floor(Math.random() * 10)
 
-    while(questions.used[randomQuestion] == true){
+    while(questions[randomQuestion].used == true){
         randomQuestion = Math.floor(Math.random() * 10)
     }
 currentQuestion = randomQuestion
 
-questions.used[randomQuestion] = true
+questions[randomQuestion].used = true
 return currentQuestion
 }
   
   function quizLoop(){
-if(questionCounter == 10){
-    console.log("You won a million")
-}
+
 currentQuestion = nextQuestion()
 
 questionCounter = questionCounter + 1
 
-console.log(currentQuestion)
+console.log(questions[currentQuestion].question + "\n" + questions[currentQuestion].answerList)
 
 let input;
 
 input = prompt.question("Enter your answer: ")
 
-checkAnswer()
+answerCheck(input)
 }
+
+function answerCheck(input){
+    let currentWinnings;
+    let playerChoice;
+    if(input == questions[currentQuestion].correctAnswer){
+        currentWinnings = moneyAwarded[questionCounter - 1]
+
+    if(questionCounter == 10){
+     console.log("You won a million")
+    process.exit();
+    }
+
+    console.log("Correct! Your new cash prize is: " + moneyAwarded[questionCounter - 1] + "\nYour next cash prize will be: " + moneyAwarded[questionCounter])
+    
+    playerChoice = prompt.question("Would you like to continue or cash out your prize?(Yes/No): ");
+    while(playerChoice != "Yes" && playerChoice != "No"){
+        playerChoice = prompt.question("Please enter Yes or No: ")
+    }
+        if(playerChoice == "Yes"){
+            quizLoop()
+    }else{
+        console.log("You cashed out with: £" + currentWinnings)
+        process.exit();
+    }
+}else{
+    console.log("Incorrect! Unfortunatley you lose your cash prize")
+    process.exit();
+}
+}
+quizLoop();
