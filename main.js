@@ -29,3 +29,20 @@ currentQuestion = randomQuestion
 questions.used[randomQuestion] = true
 return currentQuestion
 }
+  
+  function quizLoop(){
+if(questionCounter == 10){
+    console.log("You won a million")
+}
+currentQuestion = nextQuestion()
+
+questionCounter = questionCounter + 1
+
+console.log(currentQuestion)
+
+let input;
+
+input = prompt.question("Enter your answer: ")
+
+checkAnswer()
+}
